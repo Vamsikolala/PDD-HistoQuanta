@@ -1,0 +1,81 @@
+import SwiftUI
+
+struct GITguidelinesher2: View {
+    @Environment(\.dismiss) private var dismiss
+
+    let tableRows: [(String, String)] = [
+        ("No reactivity or no membranous reactivity in any cancer cell", "Negative by IHC"),
+        ("Cancer cell cluster* with a faint or barely perceptible membranous reactivity irrespective of percentage of cancer cells positive", "Negative by IHC"),
+        ("Cancer cell cluster* with a weak to moderate complete, basolateral, or lateral membranous reactivity irrespective of percentage of cancer cells positive", "Equivocal by IHC"),
+        ("Cancer cell cluster* with a strong complete basolateral, or lateral membranous reactivity irrespective of percentage of cancer cells positive", "Positive")
+    ]
+
+    var body: some View {
+        VStack(spacing: 20) {
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+            .padding([.leading, .top], 18)
+            .padding(.bottom, 4)
+
+            Text("Guide lines")
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(5)
+                .padding(.horizontal)
+
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    TableCellView(text: "HER2 IHC Pattern in Biopsy Specimen", isHeader: true)
+                    TableCellView(text: "HER2 Expression Assessment", isHeader: true)
+                }
+                .frame(height: 80)
+
+                ForEach(0..<tableRows.count, id: \.self) { idx in
+                    HStack(spacing: 0) {
+                        TableCellView(text: tableRows[idx].0, isHeader: false)
+                        TableCellView(text: tableRows[idx].1, isHeader: false)
+                    }
+                    .frame(height: 80)
+                }
+            }
+            .padding(.horizontal)
+            .border(Color.black, width: 1)
+
+            Spacer()
+        }
+        .padding(.top, 16)
+        .navigationBarBackButtonHidden(true) // <------- Only your left arrow is shown
+    }
+}
+
+struct TableCellView: View {
+    let text: String
+    let isHeader: Bool
+
+    var body: some View {
+        Text(text)
+            .font(isHeader ? .body.bold() : .body)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(10)
+            .background(isHeader ? Color.gray.opacity(0.2) : Color.white)
+            .border(Color.black, width: 1)
+    }
+}
+
+struct GITguidelinesher2_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            GITguidelinesher2()
+        }
+    }
+}
