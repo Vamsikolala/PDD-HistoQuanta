@@ -1,0 +1,69 @@
+import SwiftUI
+
+struct NETGradingView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header with back arrow and title on same line
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+                
+                Text("GIT")
+                    .font(.title)
+                    .bold()
+                
+                Spacer()
+            }
+            .padding(.top, 20)
+            .padding(.leading, 8)
+            .padding(.trailing, 8)
+            .padding(.bottom, 20)
+
+            // Subtitle
+            VStack(spacing: 8) {
+                Text("NET(Neuro Endocrine Tumor )")
+                    .font(.headline)
+            }
+            .padding(.bottom, 24)
+
+            // Info box
+            VStack(spacing: 18) {
+                Text("<3% - Well differentiated neuroendocrine tumour - grade 1")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+
+                Text("3-20% - Well differentiated neuroendocrine tumour - grade 2")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+
+                Text(">20% - Well differentiated neuroendocrine tumour - grade 3")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+            }
+            .padding()
+            .background(Color.blue.opacity(0.5))
+            .cornerRadius(12)
+            .padding(.horizontal, 32)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct NETGradingView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            NETGradingView()
+        }
+    }
+}
