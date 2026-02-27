@@ -1,0 +1,88 @@
+import SwiftUI
+
+struct Aboutscreen1: View {
+    @State private var doctorName: String = ""
+    @State private var idNumber: String = ""
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Image("microscope")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .opacity(0.13)
+                    .background(Color(red: 213/255, green: 241/255, blue: 250/255).ignoresSafeArea())
+
+                VStack {
+                    Spacer().frame(height: 56)
+                    VStack(spacing: 0) {
+                        Text("HistoQuanta")
+                            .font(.system(size: 38, weight: .bold))
+                            .foregroundColor(.black)
+                            .padding(.bottom, 6)
+                        
+                        Text("Doctor's Portal")
+                            .font(.title2)
+                            .foregroundColor(.black.opacity(0.75))
+                            .padding(.bottom, 26)
+                        
+                        VStack(spacing: 22) {
+                            TextField("Doctor's Name", text: $doctorName)
+                                .padding()
+                                .background(Color.white.opacity(0.88))
+                                .cornerRadius(8)
+                                .font(.title3)
+                                .frame(maxWidth: 360, minHeight: 48)
+                            
+                            TextField("ID Number", text: $idNumber)
+                                .padding()
+                                .background(Color.white.opacity(0.88))
+                                .cornerRadius(8)
+                                .font(.title3)
+                                .frame(maxWidth: 360, minHeight: 48)
+                        }
+                        .padding(.horizontal, 18)
+                        
+                        NavigationLink(destination: Aboutscreen2()) {
+                            Text("Log In")
+                                .frame(maxWidth: .infinity, minHeight: 48)
+                                .background(Color(red: 54/255, green: 164/255, blue: 228/255))
+                                .foregroundColor(.white)
+                                .font(.system(size: 22, weight: .semibold))
+                                .cornerRadius(8)
+                                .shadow(color: Color.black.opacity(0.15), radius: 2, x: 0, y: 1)
+                        }
+                        .frame(maxWidth: 360)
+                        .padding(.top, 20)
+                    }
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                // Description text box fixed at the bottom
+                VStack {
+                    Spacer()
+                    Text("""
+                    Explore advanced microscopy techniques and AI-based analysis for better research insights. Learn how to track, visualize, and analyze samples efficiently using modern tools and technologies. Enhance your research workflow and achieve precise results.
+                                       @vamsi2025
+                    """)
+                        .font(.body)
+                        .foregroundColor(.white)
+                        .padding(12)
+                        .background(Color.black.opacity(0.66))
+                        .cornerRadius(12)
+                        .padding(.horizontal, 1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
+                        .padding(.bottom, 80)
+                }
+                .ignoresSafeArea(edges: .bottom)
+            }
+        }
+    }
+}
+
+#Preview {
+    Aboutscreen1()
+}
