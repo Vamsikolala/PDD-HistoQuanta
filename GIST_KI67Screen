@@ -1,0 +1,80 @@
+import SwiftUI
+
+struct GIST_KI67Screen: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+            .padding(.leading, 18)
+            .padding(.top, 18)
+            .padding(.bottom, 4)
+
+            // Title
+            Text("GIT")
+                .font(.system(size: 26, weight: .bold))
+                .padding(.top, 8)
+
+            // Subtitle
+            Text("GIST (Gastro Intestinal\nStromal Tumor)")
+                .font(.system(size: 18))
+                .multilineTextAlignment(.center)
+                .padding(.top, 18)
+
+            Spacer().frame(height: 16)
+
+            // KI67 Button
+            Button(action: {
+                // Add navigation or action here if required
+            }) {
+                Text("KI67")
+                    .foregroundColor(.white)
+                    .font(.system(size: 18, weight: .medium))
+                    .frame(maxWidth: .infinity, minHeight: 48)
+                    .background(Color(red: 0.51, green: 0.84, blue: 1.0))
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 4)
+
+            // Risk Grades
+            VStack(spacing: 6) {
+                Text("<5% = low risk")
+                    .font(.system(size: 18))
+                    .multilineTextAlignment(.center)
+
+                Text("6-8% - intermediate\nrisk")
+                    .font(.system(size: 18))
+                    .multilineTextAlignment(.center)
+
+                Text(">8% = high risk")
+                    .font(.system(size: 18))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.top, 32)
+            .padding(.horizontal, 18)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct GIST_KI67Screen_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            GIST_KI67Screen()
+        }
+    }
+}
+
