@@ -1,0 +1,65 @@
+import SwiftUI
+
+struct HeadNeckScreen: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("Head & Neck")
+                    .font(.system(size: 30, weight: .medium))
+                Spacer()
+                Spacer().frame(width: 26)
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 12)
+
+            Spacer().frame(height: 48)
+
+            VStack(spacing: 30) {
+                NavigationLink(destination: P16()) {
+                    Text("P16")
+                        .font(.system(size: 24, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                        .cornerRadius(10)
+                }
+                .frame(width: 320)
+                NavigationLink(destination: HeadneckHER2()) {
+                    Text("HER-2")
+                        .font(.system(size: 24, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                        .cornerRadius(10)
+                }
+                .frame(width: 320)
+            }
+            .padding(.top, 24)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct HeadNeckScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            HeadNeckScreen()
+        }
+    }
+}
