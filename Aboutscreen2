@@ -1,0 +1,86 @@
+import SwiftUI
+
+struct Aboutscreen2: View {
+    @State private var patientName: String = ""
+    @State private var patientID: String = ""
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top bar: Back arrow + Title on SAME LINE
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 10)
+                }
+                Spacer()
+                Text("Patient Information")
+                    .font(.system(size: 29, weight: .medium))
+                    .foregroundColor(.black)
+                Spacer()
+            }
+            .padding(.top, 28)
+            .padding(.bottom, 20)
+
+            Text("please enter the patients details to proceed")
+                .font(.system(size: 15))
+                .foregroundColor(.black.opacity(0.78))
+                .padding(.top, 3)
+                .padding(.bottom, 29)
+                .padding(.horizontal, 20)
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Patient's name")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                TextField("Enter details", text: $patientName)
+                    .padding(.horizontal)
+                    .frame(height: 38)
+                    .background(Color.gray.opacity(0.25))
+                    .cornerRadius(3)
+
+                Text("ID Number")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding(.top, 10)
+                TextField("Enter details", text: $patientID)
+                    .padding(.horizontal)
+                    .frame(height: 38)
+                    .background(Color.gray.opacity(0.25))
+                    .cornerRadius(3)
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 22)
+
+            // Navigation to Aboutscreen3
+            NavigationLink(destination: Aboutscreen3()) {
+                Text("continue")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 46)
+                    .background(Color(red: 120/255, green: 214/255, blue: 254/255))
+                    .cornerRadius(6)
+            }
+            .padding(.horizontal, 21)
+            .padding(.top, 5)
+
+            Spacer()
+
+            Text("search patient details")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.black)
+                .shadow(color: Color.gray.opacity(0.3), radius: 2, x: 1, y: 1)
+                .padding(.bottom, 30)
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+#Preview {
+    NavigationStack {
+        Aboutscreen2()
+    }
+}
