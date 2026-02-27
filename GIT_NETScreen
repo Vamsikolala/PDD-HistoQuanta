@@ -1,0 +1,76 @@
+import SwiftUI
+
+struct GIT_NETScreen: View {
+    @Environment(\.dismiss) private var dismiss
+
+    let buttons = [
+        ("Stomach", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Duodenum and ampulla", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Jejunum and ileum", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Colon", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Appendix", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Pancreas", Color(red: 0.51, green: 0.84, blue: 1.0)),
+        ("Ki-67", Color(red: 0.63, green: 0.45, blue: 0.74))
+    ]
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("GIT")
+                    .font(.system(size: 26, weight: .bold))
+                Spacer()
+            }
+            .padding([.horizontal, .top], 18)
+            .padding(.bottom, 4)
+
+            Text("NET(Neuroendocrine\ntumour)")
+                .font(.system(size: 20))
+                .multilineTextAlignment(.center)
+                .padding(.top, 8)
+
+            Spacer().frame(height: 28)
+
+            // Simple NavigationLinks
+            ForEach(buttons.indices, id: \.self) { index in
+                NavigationLink(destination: getDestination(for: buttons[index].0)) {
+                    Text(buttons[index].0)
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .medium))
+                        .frame(maxWidth: .infinity, minHeight: 52)
+                        .background(buttons[index].1)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 21)
+                .padding(.bottom, 10)
+            }
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+    
+    @ViewBuilder
+    private func getDestination(for type: String) -> some View {
+        if type == "Stomach" {
+            NETStomachScreen()
+        } else {
+            NETGradingView()
+        }
+    }
+}
+
+struct GIT_NETScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack { GIT_NETScreen() }
+    }
+}
