@@ -1,0 +1,157 @@
+import SwiftUI
+
+struct ER: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var showHScore = false
+    @State private var showGuidelines = false
+
+    let columnWidth: CGFloat = 125
+    let rowHeight: CGFloat = 90
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 10)
+                }
+                Spacer()
+                Text("Breast-ER")
+                    .font(.system(size: 28, weight: .regular))
+                Spacer()
+                Button(action: { showGuidelines = true }) {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 26))
+                        .foregroundColor(.black)
+                        .padding(.trailing, 10)
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 18)
+            .padding(.bottom, 8)
+
+            NavigationLink(destination: Guidelines(), isActive: $showGuidelines) { EmptyView() }
+
+            Spacer().frame(height: 20)
+
+            Button(action: {}) {
+                Text("Allred score")
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 320, minHeight: 36)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(3)
+            }
+            .padding(.bottom, 18)
+
+            Text("proportion score + Intensity score\n=total score")
+                .font(.system(size: 18))
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 10)
+
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("proportion score")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: columnWidth, height: rowHeight)
+                        .multilineTextAlignment(.center)
+                        .border(Color.black, width: 1)
+                    Text("intensity score")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: columnWidth, height: rowHeight)
+                        .multilineTextAlignment(.center)
+                        .border(Color.black, width: 1)
+                    Text("total score")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: columnWidth, height: rowHeight)
+                        .multilineTextAlignment(.center)
+                        .border(Color.black, width: 1)
+                }
+                HStack(spacing: 0) {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("0-<1% = 1")
+                        Text("1-10% = 2")
+                        Text("11-33% = 3")
+                        Text("34-66% = 4")
+                        Text("67-100% = 5")
+                        Spacer()
+                    }
+                    .font(.system(size: 16))
+                    .frame(width: columnWidth, height: rowHeight, alignment: .topLeading)
+                    .border(Color.black, width: 1)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("weak (1+)")
+                        Text("moderate (2+)")
+                        Text("strong (3+)")
+                        Spacer()
+                    }
+                    .font(.system(size: 16))
+                    .frame(width: columnWidth, height: rowHeight, alignment: .topLeading)
+                    .border(Color.black, width: 1)
+
+                    Text("PS+IS")
+                        .font(.system(size: 16))
+                        .frame(width: columnWidth, height: rowHeight, alignment: .top)
+                        .border(Color.black, width: 1)
+                }
+            }
+            .padding(.bottom, 12)
+            .padding(.horizontal, 6)
+
+            HStack {
+                Spacer()
+                Button(action: {}) {
+                    Text("VALUE")
+                        .font(.system(size: 16))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 3)
+                        .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                        .cornerRadius(3)
+                }
+            }
+            .padding(.trailing, 28)
+            .padding(.bottom, 10)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("INFERENCE:")
+                    .font(.system(size: 16, weight: .bold))
+                Text("0-2 NEGATIVE")
+                    .font(.system(size: 16))
+                Text("3-8 POSITIVE")
+                    .font(.system(size: 16))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 38)
+            .padding(.bottom, 32)
+
+            NavigationLink(destination: ER_Hscore(), isActive: $showHScore) { EmptyView() }
+            Button(action: { showHScore = true }) {
+                Text("h-score")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 320, minHeight: 38)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(3)
+            }
+            .padding(.bottom, 18)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct ER_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ER()
+        }
+    }
+}
