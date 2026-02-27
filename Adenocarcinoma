@@ -1,0 +1,64 @@
+import SwiftUI
+
+struct Adenocarcinoma: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 16) {
+                // Top bar
+                HStack {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "arrow.left")
+                            .resizable()
+                            .frame(width: 26, height: 26)
+                            .foregroundColor(.black)
+                    }
+                    Spacer()
+                    Text("Adenocarcinoma")
+                        .font(.system(size: 26, weight: .semibold))
+                    Spacer()
+                    Color.clear.frame(width: 26)
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 30)
+
+                // Buttons directly under heading
+                VStack(spacing: 20) {
+                    NavigationLink(destination: AdenocarcinomaHER2()) {
+                        Text("HER2- Surgical specimen")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .medium))
+                            .frame(maxWidth: .infinity, minHeight: 48)
+                            .background(Color(red: 0.51, green: 0.84, blue: 1.0))
+                            .cornerRadius(10)
+                    }
+                    NavigationLink(destination: GITBiopsySpecimen()) {
+                        Text("HER2 - Biopsy Specimen")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .medium))
+                            .frame(maxWidth: .infinity, minHeight: 48)
+                            .background(Color(red: 0.51, green: 0.84, blue: 1.0))
+                            .cornerRadius(10)
+                    }
+                }
+                .padding(.horizontal, 24)
+
+                // Optional small bottom space
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, alignment: .top)
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct Adenocarcinoma_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            Adenocarcinoma()
+        }
+    }
+}
