@@ -1,0 +1,78 @@
+
+import SwiftUI
+
+struct ThyroidKi67: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("Thyroid")
+                    .font(.system(size: 30, weight: .medium))
+                Spacer()
+                Spacer().frame(width: 26)
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 12)
+
+            Spacer().frame(height: 48)
+
+            // Ki67 Button
+            Button(action: {}) {
+                Text("Ki67")
+                    .font(.system(size: 26, weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(8)
+            }
+            .frame(width: 320)
+            .padding(.bottom, 22)
+
+            // Percentage Labels
+            VStack(spacing: 4) {
+                Text("<3%")
+                Text(">=3-<5%")
+                Text(">=5%")
+            }
+            .font(.system(size: 20, weight: .medium))
+            .padding(.bottom, 32)
+
+            // Inference
+            VStack(alignment: .leading, spacing: 12) {
+                Text("INFERENCE:")
+                    .font(.system(size: 20, weight: .semibold))
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(">5%  1. Hobnail variant of papillary thyroid carcinoma.\n     2. Follicular thyroid carcinoma")
+                        .font(.system(size: 18))
+                    Text(">10%  1. poorly differentiated thyroid carcinoma\n     2. Anaplastic carcinoma")
+                        .font(.system(size: 18))
+                }
+            }
+            .padding(.horizontal, 22)
+            .padding(.top, 12)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct ThyroidKi67_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ThyroidKi67()
+        }
+    }
+}
