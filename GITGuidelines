@@ -1,0 +1,116 @@
+import SwiftUI
+
+struct GITGuidelines: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ZStack {
+            Color.white.ignoresSafeArea()
+
+            VStack(spacing: 0) {
+
+                // FULL-WIDTH TOP BAR (fills visual top space)
+                ZStack {
+                    Color(red: 0.51, green: 0.84, blue: 1.0)
+                        .ignoresSafeArea(edges: .top)
+
+                    HStack {
+                        Button(action: { dismiss() }) {
+                            Image(systemName: "arrow.left")
+                                .resizable()
+                                .frame(width: 22, height: 22)
+                                .foregroundColor(.white)
+                        }
+
+                        Spacer()
+
+                        Text("Guide lines")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(.white)
+
+                        Spacer()
+
+                        Color.clear.frame(width: 22)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                    .padding(.top, 10) // minimal extra space inside bar
+                }
+                .frame(height: 60) // height of the top bar
+
+                // CONTENT JUST UNDER THE BAR
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 0) {
+                        HStack {
+                            cellText("HER2 IHC Score", isHeader: true)
+                                .frame(width: 90, height: 46, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                            cellText("HER2 IHC Pattern in\nSurgical Specimen", isHeader: true)
+                                .frame(width: 230, height: 46, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                        }
+                        HStack(alignment: .top) {
+                            cellText("0")
+                                .frame(width: 90, height: 60, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                            cellText("No reactivity or membranous reactivity in <10% of cancer cells")
+                                .frame(width: 230, height: 60, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                        }
+                        HStack(alignment: .top) {
+                            cellText("1+")
+                                .frame(width: 90, height: 70, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                            cellText("Faint or barely perceptible membranous reactivity in ≥10% of cancer cells; cells are reactive only in part of their membrane")
+                                .frame(width: 230, height: 70, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                        }
+                        HStack(alignment: .top) {
+                            cellText("2+")
+                                .frame(width: 90, height: 70, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                            cellText("Weak to moderate complete, basolateral or lateral membranous reactivity in ≥10% of tumor cells")
+                                .frame(width: 230, height: 70, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                        }
+                        HStack(alignment: .top) {
+                            cellText("3+")
+                                .frame(width: 90, height: 60, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                            cellText("Strong complete, basolateral or lateral membranous reactivity in ≥10% of cancer cells")
+                                .frame(width: 230, height: 60, alignment: .topLeading)
+                                .border(Color.black, width: 0.7)
+                        }
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 3)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+                    .padding(.horizontal, 8)
+                    .padding(.top, 8)
+                    .frame(maxWidth: .infinity, alignment: .top)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+
+    @ViewBuilder
+    func cellText(_ text: String, isHeader: Bool = false) -> some View {
+        Text(text)
+            .font(isHeader ? .subheadline.weight(.bold) : .subheadline)
+            .multilineTextAlignment(.leading)
+            .padding(8)
+            .background(Color.white)
+    }
+}
+
+struct GITGuidelines_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            GITGuidelines()
+        }
+    }
+}
