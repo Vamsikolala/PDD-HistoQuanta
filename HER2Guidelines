@@ -1,0 +1,95 @@
+import SwiftUI
+
+struct HER2Guidelines: View {
+    @Environment(\.dismiss) var dismiss
+
+    let cellWidth: CGFloat = 180
+    let cellHeight: CGFloat = 110
+
+    var body: some View {
+        VStack {
+            // Top bar with back arrow
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left") // Use your custom image asset if needed
+                        .resizable()
+                        .frame(width: 28, height: 28)
+                        .foregroundColor(.black)
+                        .padding(.leading, 16)
+                }
+                Spacer()
+                Text("Guide lines")
+                    .font(.system(size: 28, weight: .medium))
+                    .padding(.trailing, 48)
+                Spacer()
+            }
+            .padding(.top, 18)
+
+            // Guide lines header button
+            Button(action: {}) {
+                Text("Guide lines")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(4)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 18)
+            .padding(.bottom, 16)
+
+            ScrollView(.horizontal) {
+                HStack(spacing: 0) {
+                    VStack(spacing: 0) {
+                        tableHeaderCell("Result Category", width: cellWidth, height: cellHeight)
+                        tableRowCell("Positive (Score 3+)", width: cellWidth, height: cellHeight)
+                        tableRowCell("Equivocal (Score 2+)", width: cellWidth, height: cellHeight)
+                        tableRowCell("Negative (Score 1+) #", width: cellWidth, height: cellHeight)
+                        tableRowCell("Negative (Score 0 or 0+#)", width: cellWidth, height: cellHeight)
+                    }
+                    .border(Color.black, width: 1)
+
+                    VStack(spacing: 0) {
+                        tableHeaderCell("Criteria", width: cellWidth, height: cellHeight)
+                        tableRowCell("Complete membrane staining that is intense and >10% of tumor cells*", width: cellWidth, height: cellHeight)
+                        tableRowCell("Complete membrane staining that is weak to moderate and within >10% of tumor cells\nor\nIncomplete membrane staining that is faint/barely perceptible and within >10% of tumor cells", width: cellWidth, height: cellHeight)
+                        tableRowCell("Incomplete membrane staining that is faint/barely perceptible and within ≤10% of tumor cells", width: cellWidth, height: cellHeight)
+                        tableRowCell("No staining observed (lack/absent membrane staining)", width: cellWidth, height: cellHeight)
+                    }
+                    .border(Color.black, width: 1)
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 8)
+            }
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+
+    func tableHeaderCell(_ text: String, width: CGFloat, height: CGFloat) -> some View {
+        Text(text)
+            .font(.system(size: 15, weight: .semibold))
+            .multilineTextAlignment(.center)
+            .frame(width: width, height: height)
+            .border(Color.black, width: 1)
+    }
+
+    func tableRowCell(_ text: String, width: CGFloat, height: CGFloat) -> some View {
+        Text(text)
+            .font(.system(size: 14))
+            .multilineTextAlignment(.leading)
+            .frame(width: width, height: height, alignment: .topLeading)
+            .padding(.horizontal, 8)
+            .border(Color.black, width: 1)
+    }
+}
+
+struct HER2Guidelines_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack { HER2Guidelines() }
+    }
+}
