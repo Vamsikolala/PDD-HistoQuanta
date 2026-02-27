@@ -1,0 +1,50 @@
+import SwiftUI
+
+struct NETguidelines: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Row with left arrow
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+            }
+            .padding(.leading, 18)
+            .padding(.top, 18)
+            .padding(.bottom, 4)
+
+            // Guide lines label at top
+            Text("Guide lines")
+                .font(.title3)
+                .foregroundColor(.white)
+                .frame(maxWidth: 280, minHeight: 40)
+                .background(Color(red: 0.51, green: 0.84, blue: 1.0))
+                .cornerRadius(7)
+                .padding(.bottom, 24)
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, alignment: .center)
+
+            // Table image (Frame-43 should be added to Xcode assets as "Frame-43")
+            Image("Frame-43")
+                .resizable()
+                .scaledToFit()
+                .padding(.horizontal, 6)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct NETguidelines_Previews: PreviewProvider {
+    static var previews: some View {
+        NETguidelines()
+    }
+}
