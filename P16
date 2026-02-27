@@ -1,0 +1,76 @@
+import SwiftUI
+
+struct P16: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var showGuidelines = false
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("Head & Neck")
+                    .font(.system(size: 30, weight: .medium))
+                Spacer()
+                Button(action: { showGuidelines = true }) {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 26))
+                        .foregroundColor(.black)
+                }
+                NavigationLink(destination: GuidelinesP16(), isActive: $showGuidelines) {
+                    EmptyView()
+                }
+                .hidden()
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 12)
+
+            Spacer().frame(height: 30)
+
+            Button(action: {}) {
+                Text("P16")
+                    .font(.system(size: 26, weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color(red: 163/255, green: 108/255, blue: 188/255))
+                    .cornerRadius(9)
+            }
+            .frame(width: 120, height: 48)
+            .padding(.bottom, 35)
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .fill(Color(red: 0.54, green: 0.87, blue: 1.0))
+                VStack(spacing: 12) {
+                    Text("<50 = neg")
+                    Text("50-70 = equivocal")
+                    Text(">70% = positive")
+                }
+                .font(.system(size: 22, weight: .medium))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+            }
+            .frame(width: 350, height: 210)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct P16_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            P16()
+        }
+    }
+}
