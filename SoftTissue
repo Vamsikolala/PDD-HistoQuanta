@@ -1,0 +1,70 @@
+
+import SwiftUI
+
+struct SoftTissue: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top Bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 26, height: 26)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("Soft Tissue")
+                    .font(.system(size: 30, weight: .medium))
+                Spacer()
+                Spacer().frame(width: 26)
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 12)
+
+            Spacer().frame(height: 48)
+
+            // Ki67 Button (Purple)
+            Button(action: {}) {
+                Text("Ki67")
+                    .font(.system(size: 26, weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color(red: 163/255, green: 108/255, blue: 188/255))
+                    .cornerRadius(10)
+            }
+            .frame(width: 340)
+            .padding(.bottom, 32)
+
+            // Grade Info Box (Blue)
+            ZStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .fill(Color(red: 0.54, green: 0.87, blue: 1.0))
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("0 to 9%   = grade 1")
+                    Text("10-29%  = grade 2")
+                    Text(">30%      =grade 3")
+                }
+                .font(.system(size: 22, weight: .medium))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+            }
+            .frame(width: 360, height: 130)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct SoftTissueKi67_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            SoftTissue()
+        }
+    }
+}
