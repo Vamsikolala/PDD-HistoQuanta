@@ -1,0 +1,84 @@
+import SwiftUI
+
+struct Guidelines: View {
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top bar with only left arrow image to navigate back
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 10)                }
+                Spacer()
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 16)
+
+            Spacer().frame(height: 36)
+
+            Button(action: {}) {
+                Text("Guide lines")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 320, minHeight: 36)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(3)
+            }
+            .padding(.bottom, 28)
+
+            ScrollView {
+                VStack(spacing: 0) {
+                    HStack(spacing: 0) {
+                        cell("ER Result Category", width: 95, isHeader: true)
+                        cell("Criteria", width: 90, isHeader: true)
+                        cell("Comments", width: 185, isHeader: true)
+                    }
+                    .background(Color.gray.opacity(0.13))
+
+                    HStack(spacing: 0) {
+                        cell("Positive", width: 95)
+                        cell("≥1% of tumor cell nuclei immunoreactive", width: 90)
+                        cell("Include in report the overall percent cancer cells staining as a range or specific number.\nIntensity of staining is reported semi-quantitatively as an average (1+, 2+, or 3+).", width: 185)
+                    }
+                    Divider().background(Color.gray.opacity(0.4))
+
+                    HStack(spacing: 0) {
+                        cell("Low Positive", width: 95)
+                        cell("1-10% of tumor cell nuclei are immunoreactive", width: 90)
+                        cell("The following report comment is recommended and is available to add in standardized form in the ‘Comments on ER Results’ section. The cancer in this sample has a low level (1–10%) of ER expression by IHC. There are limited data on the overall benefit of endocrine therapies for patients with low level (1–10%) ER expression, but they urgently suggest possible benefit, & patients are considered eligible for endocrine treatment. These are data that suggest behaviors even with these results are heterogenous in both behavior and biology and often have gene expression profiles more similar to ER negative cancers.\nThe Low Positive interpretation applies only to invasive carcinoma and is not required for Progesterone receptor or DCIS.", width: 185)
+                    }
+                    Divider().background(Color.gray.opacity(0.4))
+
+                    HStack(spacing: 0) {
+                        cell("Negative", width: 95)
+                        cell("<1% of tumor cell nuclei immunoreactive", width: 90)
+                        cell("Include the status of internal controls in report. If internal controls are absent but external controls stain appropriately, include recommended comment.\n‘No interpretable positivity for ER is present, but external controls are appropriately positive. If only negative results, then sample specimen that contains internal controls may be warranted for confirmation of ER status.’", width: 185)
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 22)
+            }
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+
+    func cell(_ text: String, width: CGFloat, isHeader: Bool = false) -> some View {
+        Text(text)
+            .font(.system(size: isHeader ? 15 : 14, weight: isHeader ? .medium : .regular))
+            .frame(width: width, alignment: .leading)
+            .padding(.vertical, 7)
+            .padding(.horizontal, 3)
+            .border(Color.gray.opacity(isHeader ? 0.6 : 0.4), width: isHeader ? 1.4 : 0.7)
+    }
+}
+
+#Preview {
+    Guidelines()
+}
