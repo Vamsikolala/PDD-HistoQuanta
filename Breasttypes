@@ -1,0 +1,80 @@
+import SwiftUI
+
+struct Breasttypes: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var showER = false
+    @State private var showPR = false
+    @State private var showHER2 = false
+    @State private var showKI67 = false
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top bar: Back arrow + Centered Title
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+                
+                Text("Breast")
+                    .font(.system(size: 30, weight: .regular))
+                    .foregroundColor(.black)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 20)
+            .padding(.bottom, 36)
+
+            // Buttons VStack
+            VStack(spacing: 20) {
+                NavigationLink(destination: ER(), isActive: $showER) { EmptyView() }
+                BlueBreastButton(title: "ER (Estrogen Receptor)") {
+                    showER = true
+                }
+                NavigationLink(destination: PR(), isActive: $showPR) { EmptyView() }
+                BlueBreastButton(title: "PR(Progesterone Receptor)") {
+                    showPR = true
+                }
+                NavigationLink(destination: BreastHER2(), isActive: $showHER2) { EmptyView() }
+                BlueBreastButton(title: "HER2") {
+                    showHER2 = true
+                }
+                NavigationLink(destination: Ki67(), isActive: $showKI67) { EmptyView() }
+                BlueBreastButton(title: "Ki67") {
+                    showKI67 = true
+                }
+            }
+            .padding(.horizontal, 18)
+
+            Spacer()
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct BlueBreastButton: View {
+    let title: String
+    var action: (() -> Void)? = nil
+    var body: some View {
+        Button(action: {
+            action?()
+        }) {
+            Text(title)
+                .font(.system(size: 20))
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity, minHeight: 48)
+                .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                .cornerRadius(10)
+        }
+    }
+}
+
+#Preview {
+    NavigationStack { Breasttypes() }
+}
