@@ -1,0 +1,147 @@
+import SwiftUI
+
+struct PR: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var showHScore = false
+
+    let colWidth: CGFloat = 120
+    let tableLineColor = Color.black
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Top bar
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "arrow.left")
+                        .resizable()
+                        .frame(width: 28, height: 28)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Text("PR")
+                    .font(.system(size: 28, weight: .medium))
+                Spacer()
+                Color.clear.frame(width: 28, height: 28)
+            }
+            .padding(.horizontal, 18)
+            .padding(.top, 20)
+
+            Spacer().frame(height: 36)
+
+            Button(action: {}) {
+                Text("Allred score")
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 300, minHeight: 38)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(3)
+            }
+
+            Text("proportion score + Intensity score\n=total score")
+                .font(.system(size: 20))
+                .multilineTextAlignment(.center)
+                .padding(.top, 12)
+                .padding(.bottom, 10)
+
+            // Table
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("proportion score")
+                        .font(.system(size: 16))
+                        .frame(width: colWidth, height: 32)
+                        .background(Color.white)
+                        .border(tableLineColor, width: 1)
+                    Text("intensity score")
+                        .font(.system(size: 16))
+                        .frame(width: colWidth, height: 32)
+                        .background(Color.white)
+                        .border(tableLineColor, width: 1)
+                    Text("total score")
+                        .font(.system(size: 16))
+                        .frame(width: colWidth, height: 32)
+                        .background(Color.white)
+                        .border(tableLineColor, width: 1)
+                }
+                HStack(spacing: 0) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("0<1% = 1")
+                        Text("1-10% =2")
+                        Text("11-33%=3")
+                        Text("34-66%=4")
+                        Text("67-100=5")
+                    }
+                    .font(.system(size: 16))
+                    .frame(width: colWidth, height: 110, alignment: .topLeading)
+                    .border(tableLineColor, width: 1)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("weak (1+)")
+                        Text("moderate(2+)")
+                        Text("strong(3+)")
+                    }
+                    .font(.system(size: 16))
+                    .frame(width: colWidth, height: 110, alignment: .topLeading)
+                    .border(tableLineColor, width: 1)
+
+                    Text("PS+IS")
+                        .font(.system(size: 16))
+                        .frame(width: colWidth, height: 110, alignment: .top)
+                        .border(tableLineColor, width: 1)
+                }
+            }
+            .padding(.horizontal, 2)
+
+            HStack {
+                Spacer()
+                Button(action: {}) {
+                    Text("VALUE")
+                        .font(.system(size: 16))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 3)
+                        .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                        .cornerRadius(3)
+                }
+            }
+            .padding(.trailing, 28)
+            .padding(.top, 8)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("INFERENCE:")
+                    .font(.system(size: 16, weight: .bold))
+                Text("0-2 NEGATIVE")
+                    .font(.system(size: 17))
+                Text("3-8 HORMONAL POSITIVE")
+                    .font(.system(size: 17))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 18)
+            .padding(.top, 12)
+            .padding(.bottom, 20)
+
+            Spacer()
+
+            NavigationLink(destination: PR_HScore(), isActive: $showHScore) { EmptyView() }
+            Button(action: { showHScore = true }) {
+                Text("h-score")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: 260, minHeight: 40)
+                    .background(Color(red: 0.54, green: 0.87, blue: 1.0))
+                    .cornerRadius(3)
+            }
+            .padding(.bottom, 24)
+        }
+        .background(Color.white.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+    }
+}
+
+struct PR_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            PR()
+        }
+    }
+}
